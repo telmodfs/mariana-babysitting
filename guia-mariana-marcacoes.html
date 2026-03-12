@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guia de Marcações · Mariana Babysitting</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#D4957E;--rose-l:#F7E4DC;--sage:#9AB890;--sage-l:#E8F2E4;
+  --cream:#FDF8F3;--text:#3A2E28;--muted:#8A7A72;--white:#fff;
+  --ok:#5FAD56;--warn:#E8A020;--bad:#C0392B;
+}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);line-height:1.6;padding:0 0 4rem}
+
+/* HEADER */
+.doc-header{background:linear-gradient(135deg,var(--rose-l),var(--cream));padding:3rem 2rem 2rem;text-align:center;border-bottom:1px solid var(--rose-l)}
+.doc-tag{display:inline-block;background:var(--rose);color:#fff;font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 1rem;border-radius:2rem;margin-bottom:1rem}
+.doc-title{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:var(--text);margin-bottom:0.5rem;line-height:1.2}
+.doc-title em{color:var(--rose);font-style:normal}
+.doc-sub{font-size:0.95rem;color:var(--muted);max-width:500px;margin:0 auto}
+
+/* CONTENT */
+.doc-body{max-width:780px;margin:0 auto;padding:2rem 1.5rem}
+
+/* SECTIONS */
+.section{margin-bottom:3rem}
+.section-title{font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:1.25rem;padding-bottom:0.5rem;border-bottom:2px solid var(--rose-l);display:flex;align-items:center;gap:0.6rem}
+
+/* CALLOUT */
+.callout{border-radius:1rem;padding:1.25rem 1.5rem;margin-bottom:1.5rem;border-left:4px solid}
+.callout.green{background:var(--sage-l);border-color:var(--sage);color:#2A5C24}
+.callout.rose{background:var(--rose-l);border-color:var(--rose);color:#7A3820}
+.callout.warn{background:#FFF8EC;border-color:var(--warn);color:#6A4A10}
+.callout strong{display:block;font-weight:800;margin-bottom:0.25rem;font-size:0.95rem}
+.callout p{font-size:0.9rem;line-height:1.65}
+
+/* WINNER BOX */
+.winner-box{background:var(--white);border:3px solid var(--sage);border-radius:1.25rem;padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden}
+.winner-box::before{content:"⭐ RECOMENDADA";position:absolute;top:1rem;right:1rem;background:var(--sage);color:#2A5C24;font-size:0.68rem;font-weight:800;letter-spacing:0.1em;padding:0.25rem 0.75rem;border-radius:2rem}
+.winner-name{font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:0.25rem}
+.winner-tag{font-size:0.8rem;color:var(--muted);margin-bottom:1rem}
+.winner-price{font-size:1.1rem;font-weight:800;color:var(--ok);margin-bottom:1rem}
+
+/* COMPARISON TABLE */
+.compare-table{width:100%;border-collapse:collapse;font-size:0.88rem;margin-bottom:1.5rem;border-radius:1rem;overflow:hidden;box-shadow:0 2px 12px rgba(58,46,40,0.07)}
+.compare-table th{background:var(--rose-d,#C4857A);color:#fff;padding:0.85rem 1rem;text-align:left;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em}
+.compare-table th:first-child{background:#4A3A34}
+.compare-table tr:nth-child(even) td{background:#fdf2ee}
+.compare-table tr:nth-child(odd) td{background:var(--white)}
+.compare-table td{padding:0.75rem 1rem;border-bottom:1px solid #f0e0d8;vertical-align:top}
+.compare-table td:first-child{font-weight:600;color:var(--text);background:#FAF3F0 !important}
+.check{color:var(--ok);font-weight:800}
+.cross{color:var(--bad);font-weight:800}
+.partial{color:var(--warn);font-weight:800}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:1rem}
+.step{display:flex;gap:1rem;align-items:flex-start;background:var(--white);border-radius:0.875rem;padding:1.1rem 1.25rem;box-shadow:0 1px 8px rgba(58,46,40,0.06)}
+.step-num{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--rose);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem}
+.step-body strong{display:block;font-weight:700;margin-bottom:0.2rem;font-size:0.92rem}
+.step-body p{font-size:0.86rem;color:var(--muted);line-height:1.55}
+.step-body a{color:var(--rose);font-weight:600;text-decoration:none}
+
+/* TOOL CARDS */
+.tool-cards{display:grid;grid-template-columns:1fr;gap:1.25rem}
+.tool-card{background:var(--white);border-radius:1rem;padding:1.5rem;box-shadow:0 2px 12px rgba(58,46,40,0.07);border:2px solid transparent}
+.tool-card.best{border-color:var(--sage)}
+.tool-card.ok{border-color:var(--rose-l)}
+.tool-card.skip{opacity:0.7}
+.tool-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.75rem;flex-wrap:wrap;gap:0.5rem}
+.tool-name{font-size:1.05rem;font-weight:800;color:var(--text)}
+.badge{font-size:0.68rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.65rem;border-radius:2rem}
+.badge.green{background:var(--sage-l);color:#2A5C24}
+.badge.rose{background:var(--rose-l);color:#7A3820}
+.badge.grey{background:#eee;color:#666}
+.tool-price{font-size:0.82rem;font-weight:700;color:var(--ok);margin-bottom:0.6rem}
+.tool-desc{font-size:0.86rem;color:var(--muted);line-height:1.6;margin-bottom:0.75rem}
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.8rem}
+.pros-cons div{padding:0.5rem 0.75rem;border-radius:0.5rem}
+.pros-cons .pros{background:var(--sage-l);color:#2A5C24}
+.pros-cons .cons{background:#FEF0F0;color:#7A2020}
+.pros-cons li{list-style:none;margin-bottom:0.2rem}
+.pros-cons li::before{margin-right:0.3rem}
+.pros-cons .pros li::before{content:"✓"}
+.pros-cons .cons li::before{content:"✗"}
+
+/* FOOTER */
+.doc-footer{text-align:center;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--rose-l);font-size:0.78rem;color:var(--muted)}
+
+@media(max-width:600px){
+  .pros-cons{grid-template-columns:1fr}
+  .compare-table{font-size:0.78rem}
+  .compare-table td,.compare-table th{padding:0.6rem 0.65rem}
+}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="doc-tag">Guia para a Mariana</div>
+  <h1 class="doc-title">Como receber <em>marcações</em> no teu site</h1>
+  <p class="doc-sub">Comparação simples das ferramentas disponíveis — para escolheres sem dúvidas.</p>
+</div>
+
+<div class="doc-body">
+
+  <!-- INTRO -->
+  <div class="section">
+    <div class="callout rose">
+      <strong>O que é isto?</strong>
+      <p>Em vez de os pais te enviarem DM no Instagram para marcar, podem entrar no teu site, escolher o dia e hora que querem, e tu recebes a marcação automaticamente no telemóvel. Menos mensagens para trás e para a frente, mais tempo para ti.</p>
+    </div>
+  </div>
+
+  <!-- VENCEDORA -->
+  <div class="section">
+    <div class="section-title">🏆 A nossa recomendação</div>
+
+    <div class="winner-box">
+      <div class="winner-name">Cal.com</div>
+      <div class="winner-tag">cal.com · Gratuito para sempre (plano individual)</div>
+      <div class="winner-price">💶 €0 / mês — grátis sem limites de tempo</div>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:1rem">
+        É a ferramenta mais moderna do mercado em 2026. O plano gratuito tem tudo o que precisas: vários tipos de serviço, confirmações automáticas por email, sincronização com o Google Calendar e um widget que se encaixa diretamente no teu site. Não precisas de pagar nada.
+      </p>
+      <div class="callout green" style="margin-bottom:0">
+        <strong>Porque escolhemos esta?</strong>
+        <p>Calendly foi durante anos a mais popular, mas agora está desatualizada e cara. Cal.com oferece mais funcionalidades no plano grátis do que qualquer alternativa, incluindo múltiplos tipos de serviço (Noturno, Semana, FDS) — o que o Calendly gratuito não permite.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARAÇÃO -->
+  <div class="section">
+    <div class="section-title">🔍 Comparação lado a lado</div>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Funcionalidade</th>
+          <th>Cal.com</th>
+          <th>Calendly</th>
+          <th>TidyCal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Preço</td>
+          <td><span class="check">Grátis</span></td>
+          <td><span class="warn">€12/mês</span></td>
+          <td><span class="partial">€29 único</span></td>
+        </tr>
+        <tr>
+          <td>3 tipos de serviço (Noturno, Semana, FDS)</td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="cross">✗ Só 1 no grátis</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+        </tr>
+        <tr>
+          <td>Widget no site</td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+        </tr>
+        <tr>
+          <td>Confirmações automáticas por email</td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+        </tr>
+        <tr>
+          <td>Sincroniza com Google Calendar</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>App para telemóvel</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="cross">✗</span></td>
+        </tr>
+        <tr>
+          <td>Sem branding da ferramenta visível</td>
+          <td><span class="partial">~ Mínimo</span></td>
+          <td><span class="check">✓ (pago)</span></td>
+          <td><span class="cross">✗ Sempre visível</span></td>
+        </tr>
+        <tr>
+          <td>Receber pagamento na marcação</td>
+          <td><span class="check">✓ Grátis (Stripe)</span></td>
+          <td><span class="cross">✗ Só pago</span></td>
+          <td><span class="check">✓ Grátis</span></td>
+        </tr>
+        <tr>
+          <td>Facilidade de uso</td>
+          <td><span class="check">⭐⭐⭐⭐</span></td>
+          <td><span class="check">⭐⭐⭐⭐⭐</span></td>
+          <td><span class="check">⭐⭐⭐⭐</span></td>
+        </tr>
+        <tr>
+          <td>Perguntas personalizadas na marcação</td>
+          <td><span class="check">✓ Grátis</span></td>
+          <td><span class="partial">~ Limitado</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warn">
+      <strong>Nota sobre o TidyCal</strong>
+      <p>O TidyCal cobra €29 uma única vez (sem mensalidades), o que parece barato. Mas o Cal.com é gratuito para sempre e tem mais funcionalidades. O TidyCal ainda aparece com o seu próprio logótipo nas tuas páginas mesmo no plano pago.</p>
+    </div>
+  </div>
+
+  <!-- CADA FERRAMENTA -->
+  <div class="section">
+    <div class="section-title">📋 Resumo de cada ferramenta</div>
+    <div class="tool-cards">
+
+      <div class="tool-card best">
+        <div class="tool-top">
+          <div class="tool-name">🟢 Cal.com</div>
+          <span class="badge green">Recomendada</span>
+        </div>
+        <div class="tool-price">Grátis para sempre · cal.com</div>
+        <p class="tool-desc">Ferramenta moderna, gratuita e fácil de usar. Permite criar os 3 tipos de serviço (Noturno, Semana, FDS), configurar as horas disponíveis para cada um, e encaixar diretamente no site. Os pais escolhem o serviço, o dia e a hora — tu recebes um email com a confirmação.</p>
+        <div class="pros-cons">
+          <div class="pros"><ul>
+            <li>100% gratuita</li>
+            <li>3 serviços diferentes</li>
+            <li>Widget no site</li>
+            <li>App no telemóvel</li>
+            <li>Perguntas personalizadas</li>
+          </ul></div>
+          <div class="cons"><ul>
+            <li>Interface em inglês</li>
+            <li>Pode ser ligeiramente mais complexa de configurar</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="tool-card ok">
+        <div class="tool-top">
+          <div class="tool-name">🟡 Calendly</div>
+          <span class="badge rose">Cara para o que oferece</span>
+        </div>
+        <div class="tool-price">Grátis (1 serviço) ou €12/mês (todos os serviços) · calendly.com</div>
+        <p class="tool-desc">A ferramenta mais conhecida do mercado. Muito fácil de usar e com excelente app. O problema é que o plano gratuito só permite um tipo de serviço — para teres os 3 (Noturno, Semana, FDS) precisas de pagar €12 por mês. Para uma babysitter individual, não compensa.</p>
+        <div class="pros-cons">
+          <div class="pros"><ul>
+            <li>Muito fácil de usar</li>
+            <li>App excelente</li>
+            <li>Muito conhecida</li>
+          </ul></div>
+          <div class="cons"><ul>
+            <li>€144/ano para 3 serviços</li>
+            <li>Gratuito muito limitado</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="tool-card skip">
+        <div class="tool-top">
+          <div class="tool-name">⚪ TidyCal</div>
+          <span class="badge grey">Ultrapassa pelo Cal.com</span>
+        </div>
+        <div class="tool-price">€29 pagamento único · tidycal.com</div>
+        <p class="tool-desc">Antes era uma boa alternativa barata ao Calendly. Mas agora que o Cal.com existe e é gratuito com mais funcionalidades, o TidyCal deixou de fazer sentido. O seu logótipo aparece sempre nas tuas páginas de marcação, mesmo no plano pago.</p>
+        <div class="pros-cons">
+          <div class="pros"><ul>
+            <li>Pagamento único</li>
+            <li>Simples de usar</li>
+          </ul></div>
+          <div class="cons"><ul>
+            <li>Pior que Cal.com grátis</li>
+            <li>Branding sempre visível</li>
+            <li>Sem app para telemóvel</li>
+          </ul></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COMO CONFIGURAR -->
+  <div class="section">
+    <div class="section-title">🚀 Como configurar o Cal.com — passo a passo</div>
+
+    <div class="callout green" style="margin-bottom:1.25rem">
+      <strong>Tempo estimado: 20–30 minutos</strong>
+      <p>Faz isto uma vez, e depois é automático. Só tens de gerir as tuas marcações no telemóvel.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>Criar conta gratuita</strong>
+          <p>Vai a <a href="https://cal.com" target="_blank">cal.com</a> → clica em "Get started for free" → regista com o teu email (marianamarques300802@gmail.com).</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>Ligar o Google Calendar</strong>
+          <p>Em Configurações → Calendários → Adicionar Google Calendar. Assim a Mariana não recebe marcações quando já está ocupada.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>Criar os 3 tipos de serviço</strong>
+          <p>Em "Event Types" → New Event Type. Criar um para cada serviço:</p>
+          <p>• <strong>Babysitting Noturno</strong> — €15/h — disponível noites e fins de semana<br>• <strong>Após as 19h30 (Semana)</strong> — €10/h — seg a sex após 19h30<br>• <strong>Fim de Semana</strong> — €12/h — sábados e domingos</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>Configurar as horas disponíveis</strong>
+          <p>Em "Availability" define os teus horários reais. Para cada serviço podes ter uma disponibilidade diferente.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>Adicionar perguntas ao formulário de marcação</strong>
+          <p>Em cada Event Type → "Questions" → adicionar:<br>• "Idade e nome da(s) criança(s)"<br>• "Morada / localidade"<br>• "Alguma informação importante sobre a criança?"</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <strong>Copiar o código do widget</strong>
+          <p>Em cada Event Type → "Embed" → copia o código HTML. Depois envias ao Telmo para ele inserir no teu site. É uma operação rápida.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <strong>Instalar a app no telemóvel</strong>
+          <p>Descarrega a app "Cal.com" na App Store ou Google Play. Aí recebes notificações de novas marcações, podes confirmar ou cancelar, e ver o teu calendário.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOMÍNIO -->
+  <div class="section">
+    <div class="section-title">🌐 Domínio para o teu site</div>
+
+    <div class="callout rose" style="margin-bottom:1.25rem">
+      <strong>O que é um domínio?</strong>
+      <p>É o endereço do teu site. Em vez de um link longo como "telmodfs.github.io/mariana-babysitting", passaria a ser algo como "marianababysitting.pt" — mais profissional e fácil de memorizar.</p>
+    </div>
+
+    <p style="font-size:0.9rem;margin-bottom:1.25rem;color:var(--muted)"><strong style="color:var(--text)">Sugestões de nome:</strong></p>
+
+    <table class="compare-table">
+      <thead><tr><th>Domínio</th><th>Extensão</th><th>Preço estimado</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr><td>marianababysitting.pt</td><td>.pt</td><td>~€10–15/ano</td><td>Ideal — local, profissional</td></tr>
+        <tr><td>babysitting-mariana.pt</td><td>.pt</td><td>~€10–15/ano</td><td>Boa alternativa</td></tr>
+        <tr><td>marianababysitting.com</td><td>.com</td><td>~€10–12/ano</td><td>OK, menos local</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout green" style="margin-top:1.25rem">
+      <strong>Onde registar?</strong>
+      <p>Em Portugal, os melhores registradores são <strong>dominios.pt</strong>, <strong>lusoaloja.pt</strong> ou <strong>site.pt</strong>. O registo .pt custa entre €10–15 por ano. Podes verificar se o nome está disponível nessas páginas antes de decidir.</p>
+    </div>
+
+    <div class="callout warn" style="margin-top:1rem">
+      <strong>⚠️ Importante</strong>
+      <p>O GitHub Pages (onde o site está agora alojado) permite ligar um domínio próprio gratuitamente. Isso significa que o custo anual é apenas o do domínio — sem alojamento adicional. O Telmo pode configurar isto para ti em menos de 30 minutos.</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    Preparado pela <strong>Volvara</strong> · volvara.pt · Março 2026
+  </div>
+
+</div>
+</body>
+</html>

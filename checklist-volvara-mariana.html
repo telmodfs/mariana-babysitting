@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Checklist Final · Volvara × Mariana</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#D4957E;--rose-l:#F7E4DC;--rose-d:#B87560;
+  --sage:#9AB890;--sage-l:#E8F2E4;
+  --cream:#FDF8F3;--text:#3A2E28;--muted:#8A7A72;--white:#fff;
+  --ok:#5FAD56;--ok-l:#EBF7EA;--warn:#E8A020;--warn-l:#FFF8EC;--bad:#C0392B;--bad-l:#FEEEEE;
+  --blue:#3A7BD5;--blue-l:#EBF2FF;
+}
+body{font-family:'Nunito',sans-serif;background:#F2EDE8;color:var(--text);line-height:1.6;padding:0 0 4rem}
+
+/* HEADER */
+.doc-header{background:var(--text);padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden}
+.doc-header::after{content:"INTERNO";position:absolute;top:1.2rem;right:1.5rem;background:var(--rose);color:#fff;font-size:0.65rem;font-weight:800;letter-spacing:0.15em;padding:0.2rem 0.75rem;border-radius:2rem}
+.doc-tag{display:inline-block;background:rgba(255,255,255,0.15);color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:0.3rem 1rem;border-radius:2rem;margin-bottom:1rem}
+.doc-title{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;color:#fff;margin-bottom:0.4rem}
+.doc-title em{color:var(--rose)}
+.doc-sub{font-size:0.88rem;color:rgba(255,255,255,0.65)}
+
+/* PROGRESS BAR */
+.progress-bar{background:var(--white);padding:1.25rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;border-bottom:1px solid var(--rose-l)}
+.progress-item{display:flex;align-items:center;gap:0.4rem;font-size:0.8rem;font-weight:600}
+.progress-dot{width:10px;height:10px;border-radius:50%}
+.progress-dot.done{background:var(--ok)}
+.progress-dot.pending{background:var(--warn)}
+.progress-dot.blocked{background:var(--bad)}
+
+/* CONTENT */
+.doc-body{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+
+/* SECTION */
+.section{margin-bottom:2.5rem}
+.section-title{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:1.25rem;padding:0.75rem 1rem;border-radius:0.75rem;display:flex;align-items:center;gap:0.6rem}
+.section-title.green{background:var(--ok-l);color:#2A5C24}
+.section-title.warn{background:var(--warn-l);color:#6A4A10}
+.section-title.bad{background:var(--bad-l);color:var(--bad)}
+.section-title.blue{background:var(--blue-l);color:var(--blue)}
+.section-title.neutral{background:var(--rose-l);color:var(--rose-d)}
+
+/* CHECKLIST ITEMS */
+.checklist{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:1rem}
+
+.check-item{background:var(--white);border-radius:0.875rem;padding:1.1rem 1.25rem;box-shadow:0 1px 6px rgba(58,46,40,0.06);border-left:4px solid transparent;display:flex;gap:1rem;align-items:flex-start}
+.check-item.done{border-color:var(--ok)}
+.check-item.pending{border-color:var(--warn)}
+.check-item.blocked{border-color:var(--bad)}
+.check-item.info{border-color:var(--blue)}
+
+.check-icon{flex-shrink:0;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:800;margin-top:0.1rem}
+.check-item.done .check-icon{background:var(--ok-l);color:var(--ok)}
+.check-item.pending .check-icon{background:var(--warn-l);color:var(--warn)}
+.check-item.blocked .check-icon{background:var(--bad-l);color:var(--bad)}
+.check-item.info .check-icon{background:var(--blue-l);color:var(--blue)}
+
+.check-body{flex:1}
+.check-title{font-weight:700;font-size:0.92rem;margin-bottom:0.2rem;color:var(--text)}
+.check-desc{font-size:0.83rem;color:var(--muted);line-height:1.6}
+.check-desc strong{color:var(--text)}
+.check-desc a{color:var(--blue);font-weight:600;text-decoration:none}
+
+.check-tag{display:inline-block;font-size:0.65rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2rem;margin-left:0.5rem;vertical-align:middle}
+.tag-mariana{background:#FDE8DC;color:#7A3820}
+.tag-volvara{background:var(--blue-l);color:var(--blue)}
+.tag-urgente{background:var(--bad-l);color:var(--bad)}
+.tag-opcional{background:#eee;color:#666}
+
+/* PHOTO GUIDE */
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1rem}
+.photo-card{background:var(--white);border-radius:0.875rem;padding:1.1rem;box-shadow:0 1px 6px rgba(58,46,40,0.06)}
+.photo-card-top{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem}
+.photo-card-icon{font-size:1.4rem}
+.photo-card-title{font-weight:700;font-size:0.88rem}
+.photo-card-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+.photo-badge{display:inline-block;font-size:0.65rem;font-weight:800;padding:0.1rem 0.4rem;border-radius:2rem;margin-top:0.4rem}
+.photo-badge.must{background:var(--bad-l);color:var(--bad)}
+.photo-badge.good{background:var(--warn-l);color:var(--warn)}
+.photo-badge.bonus{background:var(--ok-l);color:var(--ok)}
+
+/* INSTAGRAM SECTION */
+.ig-comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ig-card{background:var(--white);border-radius:0.875rem;padding:1.25rem;box-shadow:0 1px 6px rgba(58,46,40,0.06);border:2px solid transparent}
+.ig-card.current{border-color:var(--warn)}
+.ig-card.recommended{border-color:var(--ok)}
+.ig-card-title{font-weight:800;font-size:0.95rem;margin-bottom:0.5rem}
+.ig-card-handle{font-size:0.82rem;color:var(--muted);font-style:italic;margin-bottom:0.75rem}
+.ig-pro,.ig-con{font-size:0.8rem;padding:0.4rem 0;border-bottom:1px solid #f5eee8;display:flex;gap:0.4rem}
+.ig-pro::before{content:"✓";color:var(--ok);font-weight:800;flex-shrink:0}
+.ig-con::before{content:"✗";color:var(--bad);font-weight:800;flex-shrink:0}
+
+/* DOMAIN TABLE */
+.domain-table{width:100%;border-collapse:collapse;font-size:0.85rem;border-radius:0.875rem;overflow:hidden;box-shadow:0 1px 8px rgba(58,46,40,0.07)}
+.domain-table th{background:#4A3A34;color:#fff;padding:0.75rem 1rem;text-align:left;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.06em}
+.domain-table tr:nth-child(even) td{background:#fdf5f0}
+.domain-table tr:nth-child(odd) td{background:var(--white)}
+.domain-table td{padding:0.7rem 1rem;border-bottom:1px solid #f0e4dc;vertical-align:top}
+.rec-badge{background:var(--ok-l);color:var(--ok);font-size:0.65rem;font-weight:800;padding:0.1rem 0.4rem;border-radius:2rem}
+
+/* PRIORITY MATRIX */
+.priority-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.priority-quad{background:var(--white);border-radius:0.875rem;padding:1.25rem;box-shadow:0 1px 6px rgba(58,46,40,0.06)}
+.priority-quad-title{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:2px solid}
+.priority-quad.q1 .priority-quad-title{color:var(--bad);border-color:var(--bad)}
+.priority-quad.q2 .priority-quad-title{color:var(--warn);border-color:var(--warn)}
+.priority-quad.q3 .priority-quad-title{color:var(--blue);border-color:var(--blue)}
+.priority-quad.q4 .priority-quad-title{color:#888;border-color:#ddd}
+.priority-item{font-size:0.8rem;padding:0.3rem 0;color:var(--muted);border-bottom:1px solid #f5f0eb;display:flex;gap:0.4rem;align-items:flex-start}
+.priority-item:last-child{border:none}
+
+/* CALLOUT */
+.callout{border-radius:0.875rem;padding:1rem 1.25rem;margin-bottom:1rem;border-left:4px solid}
+.callout.green{background:var(--ok-l);border-color:var(--ok)}
+.callout.warn{background:var(--warn-l);border-color:var(--warn)}
+.callout.bad{background:var(--bad-l);border-color:var(--bad)}
+.callout.blue{background:var(--blue-l);border-color:var(--blue)}
+.callout strong{display:block;font-weight:800;font-size:0.88rem;margin-bottom:0.2rem}
+.callout p{font-size:0.83rem;line-height:1.6}
+
+/* FOOTER */
+.doc-footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--rose-l);font-size:0.75rem;color:var(--muted)}
+
+@media(max-width:600px){
+  .ig-comparison{grid-template-columns:1fr}
+  .priority-grid{grid-template-columns:1fr}
+  .photo-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <div class="doc-tag">Volvara · Uso Interno</div>
+  <h1 class="doc-title">Checklist Final · <em>Mariana Babysitting</em></h1>
+  <p class="doc-sub">Tudo o que falta para entregar o site completo — prioridades, responsáveis e instruções detalhadas</p>
+</div>
+
+<div class="progress-bar">
+  <div class="progress-item"><div class="progress-dot done"></div>Estrutura do site</div>
+  <div class="progress-item"><div class="progress-dot done"></div>Dados da Mariana</div>
+  <div class="progress-item"><div class="progress-dot done"></div>Preços e horário</div>
+  <div class="progress-item"><div class="progress-dot pending"></div>Fotos reais</div>
+  <div class="progress-item"><div class="progress-dot pending"></div>Testemunhos</div>
+  <div class="progress-item"><div class="progress-dot pending"></div>Sistema de marcações</div>
+  <div class="progress-item"><div class="progress-dot pending"></div>Instagram correto</div>
+  <div class="progress-item"><div class="progress-dot pending"></div>Domínio próprio</div>
+</div>
+
+<div class="doc-body">
+
+  <!-- MATRIZ DE PRIORIDADES -->
+  <div class="section">
+    <div class="section-title bad">🔥 Mapa de Prioridades</div>
+    <div class="priority-grid">
+      <div class="priority-quad q1">
+        <div class="priority-quad-title">🚨 Urgente + Impacto Alto</div>
+        <div class="priority-item">📸 Confirmar Instagram correto (@babysitting_mariana vs @mariana.smarques_)</div>
+        <div class="priority-item">🖼️ Foto real da Mariana para o hero</div>
+        <div class="priority-item">📅 Configurar Cal.com e inserir widget no site</div>
+      </div>
+      <div class="priority-quad q2">
+        <div class="priority-quad-title">⚡ Menos urgente + Impacto Alto</div>
+        <div class="priority-item">🗺️ Confirmar localização específica para o mapa</div>
+        <div class="priority-item">⭐ Recolher 2–3 testemunhos reais</div>
+        <div class="priority-item">🌐 Registar domínio próprio</div>
+      </div>
+      <div class="priority-quad q3">
+        <div class="priority-quad-title">📌 Urgente + Impacto Médio</div>
+        <div class="priority-item">🖼️ Fotos da galeria (5 fotos de atividades)</div>
+        <div class="priority-item">📋 Atualizar FAQ com mais detalhes reais</div>
+      </div>
+      <div class="priority-quad q4">
+        <div class="priority-quad-title">💡 Baixa urgência + Opcional</div>
+        <div class="priority-item">🎨 Logo final aprovada</div>
+        <div class="priority-item">📊 Google Analytics para tracking</div>
+        <div class="priority-item">🗺️ Mapa customizado com pins das zonas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="section">
+    <div class="section-title bad">📱 Instagram — Decisão pendente <span class="check-tag tag-urgente">Urgente</span><span class="check-tag tag-mariana">Mariana decide</span></div>
+
+    <div class="callout warn">
+      <strong>⚠️ Situação atual</strong>
+      <p>O site usa @mariana.smarques_ (perfil pessoal). Mas a Mariana tem também @babysitting_mariana (perfil de babysitting). O site deve usar o perfil profissional — mas é preciso confirmar qual está mais ativo e tem mais seguidores/conteúdo relevante.</p>
+    </div>
+
+    <div class="ig-comparison">
+      <div class="ig-card current">
+        <div class="ig-card-title">Perfil Pessoal</div>
+        <div class="ig-card-handle">@mariana.smarques_</div>
+        <div class="ig-con">Mistura conteúdo pessoal com profissional</div>
+        <div class="ig-con">Menos credível para pais que procuram babysitter</div>
+        <div class="ig-con">DMs de trabalho misturados com mensagens pessoais</div>
+        <div class="ig-pro">Pode ter mais seguidores/atividade</div>
+      </div>
+      <div class="ig-card recommended">
+        <div class="ig-card-title">Perfil Profissional</div>
+        <div class="ig-card-handle">@babysitting_mariana</div>
+        <div class="ig-pro">Separação clara entre pessoal e profissional</div>
+        <div class="ig-pro">Mais credível para pais — foco total em babysitting</div>
+        <div class="ig-pro">DMs organizados — só clientes e marcações</div>
+        <div class="ig-pro">Ideal para crescer o negócio a longo prazo</div>
+        <div class="ig-con">Pode precisar de mais conteúdo/atividade</div>
+      </div>
+    </div>
+
+    <div class="callout blue" style="margin-top:1rem">
+      <strong>📋 O que fazer</strong>
+      <p>Perguntar à Mariana qual dos dois está mais ativo e tem melhores fotos de trabalho. Se @babysitting_mariana estiver ativo, mudar todos os links do site. São 4 ocorrências no código HTML — 10 minutos de trabalho.</p>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">?</div>
+        <div class="check-body">
+          <div class="check-title">Confirmar qual Instagram usar <span class="check-tag tag-mariana">Mariana</span><span class="check-tag tag-urgente">Urgente</span></div>
+          <div class="check-desc">Perguntar: qual perfil tem mais seguidores e conteúdo de babysitting? Se for @babysitting_mariana, atualizar os 4 links no site (nav CTA, contacto Instagram, float button, formulário de contacto).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTOS -->
+  <div class="section">
+    <div class="section-title warn">📸 Fotos — Guia completo <span class="check-tag tag-mariana">Mariana envia</span></div>
+
+    <div class="callout warn">
+      <strong>Estado atual</strong>
+      <p>O site tem placeholders (cores e emojis) em 6 localizações. Fotos reais aumentam dramaticamente a confiança dos pais e o tempo que passam no site. É a alteração com maior impacto visual.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">🌸</span><span class="photo-card-title">Hero — Foto principal</span></div>
+        <p class="photo-card-desc">Foto da Mariana a sorrir, boa iluminação. Formato vertical (4:5). Fundo neutro ou exterior. Expressão calorosa e acessível.</p>
+        <span class="photo-badge must">Obrigatória</span>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">🌿</span><span class="photo-card-title">Sobre Mim</span></div>
+        <p class="photo-card-desc">Foto da Mariana em contexto de trabalho — com criança, a ler, a brincar. Ou foto mais descontraída mas ainda profissional.</p>
+        <span class="photo-badge must">Obrigatória</span>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">🎨</span><span class="photo-card-title">Galeria — Atividades criativas</span></div>
+        <p class="photo-card-desc">Desenho, pintura, plasticina, trabalhos manuais. Crianças a criar. Com autorização dos pais.</p>
+        <span class="photo-badge good">Importante</span>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">📚</span><span class="photo-card-title">Galeria — Hora de ler</span></div>
+        <p class="photo-card-desc">Leitura de livro, storytelling. Momento de calma. Transmite cuidado e atenção à criança.</p>
+        <span class="photo-badge good">Importante</span>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">🏖️</span><span class="photo-card-title">Galeria — Exterior / Brincadeira</span></div>
+        <p class="photo-card-desc">Exterior, parque, praia, jardim. Energia e movimento. Mostra que são crianças felizes.</p>
+        <span class="photo-badge good">Importante</span>
+      </div>
+      <div class="photo-card">
+        <div class="photo-card-top"><span class="photo-card-icon">🧩</span><span class="photo-card-title">Galeria — Jogos</span></div>
+        <p class="photo-card-desc">Jogos de mesa, puzzles, jogos de chão. Interação, concentração, diversão.</p>
+        <span class="photo-badge bonus">Bónus</span>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <strong>✅ Instruções para a Mariana</strong>
+      <p>Envia as fotos pelo WhatsApp ou email — não precisam de ser profissionais, fotos de telemóvel servem perfeitamente. Para fotos com crianças, confirma que os pais estão de acordo. Qualidade mínima: que não esteja desfocada nem muito escura.</p>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">📷</div>
+        <div class="check-body">
+          <div class="check-title">Foto hero (Mariana) <span class="check-tag tag-mariana">Mariana envia</span><span class="check-tag tag-urgente">Urgente</span></div>
+          <div class="check-desc">Inserir em <strong>hero-photo-frame</strong> — substituir o placeholder rosa. Formato recomendado: JPG, mínimo 800×1000px.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">📷</div>
+        <div class="check-body">
+          <div class="check-title">Foto "Sobre mim" <span class="check-tag tag-mariana">Mariana envia</span></div>
+          <div class="check-desc">Substituir o placeholder verde na secção <strong>sobre-photo</strong>. Pode ser a mesma foto do hero ou diferente.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">📷</div>
+        <div class="check-body">
+          <div class="check-title">5 fotos para a galeria <span class="check-tag tag-mariana">Mariana envia</span></div>
+          <div class="check-desc">Substituir os 5 placeholders coloridos na <strong>galeria-grid</strong>. A foto 1 é maior (span 2 colunas) — usar a melhor foto aqui.</div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Inserir fotos no HTML <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Cada foto vai para o repositório GitHub → pasta <strong>/assets/</strong>. Substituir os divs placeholder por <code>&lt;img src="assets/nome.jpg" alt="..."&gt;</code>. Comprimir a ≤200KB por foto antes de fazer upload (usar squoosh.app).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTEMUNHOS -->
+  <div class="section">
+    <div class="section-title warn">⭐ Testemunhos reais <span class="check-tag tag-mariana">Mariana recolhe</span></div>
+
+    <div class="callout warn">
+      <strong>Estado atual</strong>
+      <p>O site tem 3 testemunhos de placeholder (Ana S. de Mafra, Miguel e Sofia de Ericeira, Carla M. de Malveira). São convincentes mas não são reais — substituir o mais rápido possível.</p>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">⭐</div>
+        <div class="check-body">
+          <div class="check-title">Recolher 2–3 testemunhos reais <span class="check-tag tag-mariana">Mariana</span></div>
+          <div class="check-desc">Pedir a famílias com quem já trabalhou. Pode ser uma mensagem que tenham enviado no WhatsApp ou Instagram — copia e cola. Precisa de: <strong>nome</strong> (pode ser só próprio + inicial), <strong>localidade</strong>, e <strong>texto</strong>. Não precisa de foto.</div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Inserir testemunhos no HTML <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Substituir os 3 blocos <code>.testimonial-card</code> com os dados reais. Se só houver 2 testemunhos, remover o 3º card.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPA -->
+  <div class="section">
+    <div class="section-title blue">🗺️ Mapa — Confirmar localização <span class="check-tag tag-mariana">Mariana confirma</span></div>
+
+    <div class="callout blue">
+      <strong>Estado atual</strong>
+      <p>O mapa usa coordenadas genéricas da zona de Mafra/Ericeira. Pode ficar mais preciso se a Mariana quiser indicar uma localização específica (ex: centro de Malveira, escola onde trabalha, ou simplesmente a sua rua).</p>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">📍</div>
+        <div class="check-body">
+          <div class="check-title">Confirmar ponto central do mapa <span class="check-tag tag-mariana">Mariana</span></div>
+          <div class="check-desc">
+            Opções:<br>
+            <strong>A)</strong> Manter como está (zona genérica Mafra/Ericeira) — ok para já<br>
+            <strong>B)</strong> Centrar na Malveira (onde mora) — mais específico<br>
+            <strong>C)</strong> Usar Google Maps para partilhar link de localização específica — máximo detalhe<br><br>
+            Para opção C: Google Maps → encontrar a localização → "Partilhar" → "Incorporar mapa" → copiar o link iframe e enviar ao Telmo.
+          </div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Atualizar coordenadas do iframe <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Substituir o <code>src</code> do iframe na secção <code>#mapa</code> com o novo link. Opcional: adicionar marcadores com pins personalizados usando a Google Maps Embed API.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SISTEMA DE MARCAÇÕES -->
+  <div class="section">
+    <div class="section-title warn">📅 Sistema de Marcações — Cal.com <span class="check-tag tag-urgente">Urgente</span></div>
+
+    <div class="callout green">
+      <strong>Decisão tomada: Cal.com (gratuito)</strong>
+      <p>Guia completo de configuração foi entregue à Mariana em documento separado.</p>
+    </div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Mariana cria conta e configura Cal.com <span class="check-tag tag-mariana">Mariana</span></div>
+          <div class="check-desc">Usando o guia entregue. Criar os 3 tipos de evento (Noturno €15/h, Semana €10/h, FDS €12/h). Ligar Google Calendar. Configurar disponibilidade correta.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Mariana envia código do widget <span class="check-tag tag-mariana">Mariana</span><span class="check-tag tag-volvara">→ Volvara</span></div>
+          <div class="check-desc">Em Cal.com → Event Type → "Embed" → "Inline embed" → copiar código HTML. Enviar ao Telmo.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">⚙️</div>
+        <div class="check-body">
+          <div class="check-title">Inserir widget de marcações no site <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Adicionar nova secção <code>#marcacoes</code> entre Serviços e Horário. Incluir o script Cal.com no <code>&lt;head&gt;</code> e o widget inline. Adicionar link "Marcar agora" na nav e nos botões hero.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOMÍNIO -->
+  <div class="section">
+    <div class="section-title neutral">🌐 Domínio próprio <span class="check-tag tag-opcional">Opcional mas recomendado</span></div>
+
+    <table class="domain-table">
+      <thead><tr><th>Nome</th><th>Extensão</th><th>Preço/ano</th><th>Disponibilidade</th><th>Nota</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>marianababysitting</td>
+          <td>.pt</td>
+          <td>~€10–15</td>
+          <td>Verificar</td>
+          <td><span class="rec-badge">1ª escolha</span></td>
+        </tr>
+        <tr>
+          <td>babysitting-mariana</td>
+          <td>.pt</td>
+          <td>~€10–15</td>
+          <td>Verificar</td>
+          <td>Alternativa forte</td>
+        </tr>
+        <tr>
+          <td>marianababysitting</td>
+          <td>.com</td>
+          <td>~€10–12</td>
+          <td>Verificar</td>
+          <td>Se .pt indisponível</td>
+        </tr>
+        <tr>
+          <td>mariana-babysitting</td>
+          <td>.pt</td>
+          <td>~€10–15</td>
+          <td>Verificar</td>
+          <td>Com hífen</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout blue" style="margin-top:1rem">
+      <strong>🔧 Como ligar o domínio ao GitHub Pages (Volvara)</strong>
+      <p>
+        1. Comprar domínio em dominios.pt ou lusoaloja.pt<br>
+        2. Nas definições DNS do registrador, adicionar CNAME: <code>www</code> → <code>telmodfs.github.io</code><br>
+        3. Adicionar A records apontando para IPs do GitHub Pages (185.199.108–111.153)<br>
+        4. No repositório GitHub → Settings → Pages → Custom domain → inserir domínio<br>
+        5. Ativar "Enforce HTTPS" — certificado SSL gratuito automático<br>
+        ⏱️ Propagação: 24–48h
+      </p>
+    </div>
+
+    <div class="callout warn">
+      <strong>💰 Custo total anual da Mariana</strong>
+      <p>Domínio .pt: ~€12/ano · Cal.com: €0 · GitHub Pages: €0 · Total: <strong>~€12/ano</strong></p>
+    </div>
+  </div>
+
+  <!-- OUTROS DETALHES -->
+  <div class="section">
+    <div class="section-title blue">🔧 Outros detalhes técnicos pendentes</div>
+
+    <div class="checklist">
+      <div class="check-item pending">
+        <div class="check-icon">📊</div>
+        <div class="check-body">
+          <div class="check-title">Google Analytics / Search Console <span class="check-tag tag-volvara">Volvara</span><span class="check-tag tag-opcional">Opcional</span></div>
+          <div class="check-desc">Adicionar Google Analytics 4 para tracking de visitantes. Criar conta em analytics.google.com, copiar o script de medição e inserir no <code>&lt;head&gt;</code>. Também submeter o site ao Google Search Console para indexação mais rápida.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">🔗</div>
+        <div class="check-body">
+          <div class="check-title">Verificar todos os links do site <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Testar: Instagram (×4 links), WhatsApp wa.me, email mailto:, links internos de navegação (âncoras). Confirmar que o Formspree do formulário de contacto está ativo e a enviar para o email certo.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">📱</div>
+        <div class="check-body">
+          <div class="check-title">Teste final em Safari iOS <span class="check-tag tag-volvara">Volvara</span></div>
+          <div class="check-desc">Testar em iPhone real: scroll reveal, formulário, menu burger, galeria, FAQ accordion, horário semanal. São os elementos com mais risco de comportamento diferente no Safari.</div>
+        </div>
+      </div>
+      <div class="check-item pending">
+        <div class="check-icon">🏷️</div>
+        <div class="check-body">
+          <div class="check-title">Open Graph / Meta imagem social <span class="check-tag tag-volvara">Volvara</span><span class="check-tag tag-opcional">Opcional</span></div>
+          <div class="check-desc">Quando o site for partilhado no WhatsApp ou Facebook, deve aparecer uma imagem de pré-visualização. Criar uma imagem 1200×630px com o logo/nome da Mariana e adicionar <code>&lt;meta property="og:image"&gt;</code> no head.</div>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div class="check-body">
+          <div class="check-title">Footer atualizado para Volvara</div>
+          <div class="check-desc">Link "Feito com ❤️ pela Volvara" já aponta para volvara.pt.</div>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div class="check-body">
+          <div class="check-title">Preços reais inseridos</div>
+          <div class="check-desc">€15/h Noturno · €10/h Semana · €12/h FDS — confirmados pelo formulário.</div>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div class="check-body">
+          <div class="check-title">Bio real da Mariana inserida</div>
+          <div class="check-desc">Texto original dela, palavra por palavra, na secção "Sobre mim".</div>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div class="check-body">
+          <div class="check-title">11 zonas de cobertura inseridas</div>
+          <div class="check-desc">Malveira, Venda do Pinheiro, Igreja Nova, Cheleiros, Encarnação, Santo Isidoro, Carvoeira, Ribamar, Sobreiro, Gradil, Ericeira.</div>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div class="check-body">
+          <div class="check-title">FAQ corrigido — mínimo 2 horas</div>
+          <div class="check-desc">Resposta correta: "Tenho um mínimo de 2 horas por marcação."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMUNICAÇÃO COM A MARIANA -->
+  <div class="section">
+    <div class="section-title neutral">💬 Próximas mensagens a enviar à Mariana</div>
+
+    <div class="checklist">
+      <div class="check-item info">
+        <div class="check-icon">1</div>
+        <div class="check-body">
+          <div class="check-title">Guia Cal.com</div>
+          <div class="check-desc">Enviar o ficheiro <strong>guia-mariana-marcacoes.html</strong> com instruções passo a passo para configurar o sistema de marcações.</div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">2</div>
+        <div class="check-body">
+          <div class="check-title">Pedido de fotos</div>
+          <div class="check-desc">Enviar lista das fotos necessárias (pelo menos: foto hero dela, foto sobre mim, 3–5 fotos de atividades). Mencionar que não precisam de ser profissionais.</div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">3</div>
+        <div class="check-body">
+          <div class="check-title">Confirmar Instagram</div>
+          <div class="check-desc">Perguntar: "@babysitting_mariana está ativo? Tem fotos de trabalho? Se sim, mudo todos os links do site para esse perfil."</div>
+        </div>
+      </div>
+      <div class="check-item info">
+        <div class="check-icon">4</div>
+        <div class="check-body">
+          <div class="check-title">Pedir testemunhos</div>
+          <div class="check-desc">Sugerir que peça a 2–3 famílias com quem já trabalhou uma avaliação curta — pode ser por WhatsApp, umas palavras simples. Nome, localidade e mensagem.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <strong>Volvara</strong> · volvara.pt · Uso interno · Março 2026
+  </div>
+
+</div>
+</body>
+</html>
